@@ -2,6 +2,7 @@ import { ERROR_CODES } from '../exception/error-code';
 
 export interface IErrorResponse {
   code: ERROR_CODES;
+  statusCode: number;
   message: string;
   traceId: string;
   errors: string[];

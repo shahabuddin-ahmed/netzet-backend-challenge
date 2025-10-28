@@ -1,170 +1,329 @@
 {
-  "info": {
-    "_postman_id": "7a87f4ff-5f4f-4b9f-8c97-4d3810bd0fe4",
-    "name": "Netzet Book Management API",
-    "description": "Sample requests for exercising the Authors and Books endpoints exposed by the Netzet backend challenge.",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Authors",
-      "item": [
-        {
-          "name": "Create Author",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"firstName\": \"George\",\n  \"lastName\": \"Orwell\",\n  \"bio\": \"Author of 1984\",\n  \"birthDate\": \"1903-06-25\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/authors",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "authors"
-              ]
-            }
-          }
-        },
-        {
-          "name": "List Authors",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/authors?page=1&limit=10",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "authors"
-              ],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "10"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Author By Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/authors/{{authorId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "authors",
-                "{{authorId}}"
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Books",
-      "item": [
-        {
-          "name": "Create Book",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"title\": \"1984\",\n  \"isbn\": \"978-0451524935\",\n  \"publishedDate\": \"1949-06-08\",\n  \"genre\": \"Dystopian\",\n  \"authorId\": {{authorId}}\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/books",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "books"
-              ]
-            }
-          }
-        },
-        {
-          "name": "List Books",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/books?page=1&limit=10",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "books"
-              ],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "10"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Book By Id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseUrl}}/books/{{bookId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "books",
-                "{{bookId}}"
-              ]
-            }
-          }
-        }
-      ]
-    }
-  ],
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": "http://localhost:3000/api/v1"
-    },
-    {
-      "key": "authorId",
-      "value": "1"
-    },
-    {
-      "key": "bookId",
-      "value": "1"
-    }
-  ]
+	"info": {
+		"_postman_id": "d319a1a5-86fb-42fe-b548-e5e131eeaf94",
+		"name": "netzet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4260827",
+		"_collection_link": "https://gold-crescent-976410.postman.co/workspace/ALL-COLLECTION~c8286293-392f-4c44-8e7a-c81b21e9e1de/collection/4260827-d319a1a5-86fb-42fe-b548-e5e131eeaf94?action=share&source=collection_link&creator=4260827"
+	},
+	"item": [
+		{
+			"name": "authors",
+			"item": [
+				{
+					"name": "create authors",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Shahabuddin\",\n    \"lastName\": \"Ahmed\",\n    \"bio\": \"I’m Shahabuddin Ahmed, a backend-focused engineer from Dhaka specializing in Microservices & NestJS. I’ve shipped double-entry accounting and event-driven services that cut reporting load ~40%, improved P95 latency ~30%, and drove ledger success to 100%.\",\n    \"birthDate\": \"1993-12-20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/authors",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authors list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/authors",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update authors",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Shahabuddin 02\",\n    \"lastName\": \"Ahmed\",\n    \"bio\": \"This is biodata\",\n    \"birthDate\": \"2025-12-20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/authors/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authors details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/authors/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete authors",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/authors/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "create book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Shahabuddin\",\n  \"isbn\": \"5754754746\",\n  \"publishedDate\": \"2025-12-20\",\n  \"genre\": \"Technology\",\n  \"authorId\": 1,\n  \"createdAt\": \"2025-10-28T10:05:00Z\",\n  \"updatedAt\": \"2025-10-28T10:05:00Z\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/books",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "books list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/books",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update books",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Shahabuddin 02\",\n    \"lastName\": \"Ahmed\",\n    \"bio\": \"This is biodata\",\n    \"birthDate\": \"2025-12-20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/authors/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authors details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/authors/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete authors",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/books/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
 }

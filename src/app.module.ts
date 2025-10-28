@@ -7,6 +7,7 @@ import { APP_CONFIG, DATA_SOURCE_OPTIONS } from './common/config/app.config';
 import { SharedModule } from './shared/shared.module';
 import { DatabaseModule } from './modules/db-modules/database.module';
 import { AuthorModule } from './modules/author/author.module';
+import { BookModule } from './modules/book/book.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AuthorModule } from './modules/author/author.module';
     SharedModule,
     DatabaseModule,
     AuthorModule,
+    BookModule,
   ],
   controllers: [AppController],
   providers: [AppService],

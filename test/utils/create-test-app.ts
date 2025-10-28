@@ -1,8 +1,4 @@
-import {
-  ClassSerializerInterceptor,
-  INestApplication,
-  ValidationPipe,
-} from '@nestjs/common';
+import { ClassSerializerInterceptor, INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Reflector } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
@@ -18,60 +14,59 @@ import { LoggerService } from 'src/shared/logger-service/logger.service';
 import { InMemoryDbService } from './in-memory-db.service';
 
 export interface TestAppContext {
-  app: INestApplication;
-  dbService: InMemoryDbService;
+    app: INestApplication;
+    dbService: InMemoryDbService;
 }
 
 export const createTestApp = async (): Promise<TestAppContext> => {
-  const moduleFixture: TestingModule = await Test.createTestingModule({
-    controllers: [AuthorController, BookController],
-    providers: [
-      AuthorService,
-      BookService,
-      LoggerService,
-      {
-        provide: IDbEntityService,
-        useClass: InMemoryDbService,
-      },
-      {
-        provide: InMemoryDbService,
-        useExisting: IDbEntityService,
-      },
-    ],
-  }).compile();
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+        controllers: [AuthorController, BookController],
+        providers: [
+            AuthorService,
+            BookService,
+            LoggerService,
+            {
+                provide: IDbEntityService,
+                useClass: InMemoryDbService,
+            },
+            {
+                provide: InMemoryDbService,
+                useExisting: IDbEntityService,
+            },
+        ],
+    }).compile();
 
-  const app = moduleFixture.createNestApplication();
+    const app = moduleFixture.createNestApplication();
 
-  app.useGlobalPipes(new FormHandlerValidationPipe());
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: false,
-      forbidNonWhitelisted: false,
-      transform: true,
-    }),
-  );
-  app.useGlobalInterceptors(new ResponseInterceptor());
+    app.useGlobalPipes(new FormHandlerValidationPipe());
+    app.useGlobalPipes(
+        new ValidationPipe({
+            whitelist: false,
+            forbidNonWhitelisted: false,
+            transform: true,
+        }),
+    );
+    app.useGlobalInterceptors(new ResponseInterceptor());
 
-  const reflector =
-    app.get(Reflector, { strict: false }) ?? new Reflector();
-  app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
+    const reflector = app.get(Reflector, { strict: false }) ?? new Reflector();
+    app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
 
-  const loggerService = app.get(LoggerService);
+    const loggerService = app.get(LoggerService);
 
-  let configService: ConfigService;
-  try {
-    configService = app.get(ConfigService);
-  } catch (error) {
-    configService = new ConfigService();
-  }
+    let configService: ConfigService;
+    try {
+        configService = app.get(ConfigService);
+    } catch (error) {
+        configService = new ConfigService();
+    }
 
-  app.useGlobalFilters(new AllExceptionsFilter(configService, loggerService));
+    app.useGlobalFilters(new AllExceptionsFilter(configService, loggerService));
 
-  app.setGlobalPrefix('api/v1');
+    app.setGlobalPrefix('api/v1');
 
-  await app.init();
+    await app.init();
 
-  const dbService = moduleFixture.get(InMemoryDbService);
+    const dbService = moduleFixture.get(InMemoryDbService);
 
-  return { app, dbService };
+    return { app, dbService };
 };

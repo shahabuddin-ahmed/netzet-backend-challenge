@@ -12,30 +12,30 @@ import { LoggerService } from './shared/logger-service/logger.service';
 import { AllExceptionsFilter } from './common/exception/all-exception.filter';
 
 export const setupAPP = (app: INestApplication) => {
-  app.enableCors();
-  app.use(morgan('short'));
+    app.enableCors();
+    app.use(morgan('short'));
 
-  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+    useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
-  app.useGlobalPipes(new FormHandlerValidationPipe());
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: false,
-      forbidNonWhitelisted: false,
-      transform: true,
-    }),
-  );
-  app.useGlobalInterceptors(new ResponseInterceptor());
+    app.useGlobalPipes(new FormHandlerValidationPipe());
+    app.useGlobalPipes(
+        new ValidationPipe({
+            whitelist: false,
+            forbidNonWhitelisted: false,
+            transform: true,
+        }),
+    );
+    app.useGlobalInterceptors(new ResponseInterceptor());
 
-  const reflector = app.get(Reflector);
-  app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
+    const reflector = app.get(Reflector);
+    app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
 
-  const configSvc = app.get(ConfigService);
-  const centralLogger = new LoggerService();
-  app.useGlobalFilters(new AllExceptionsFilter(configSvc, centralLogger));
+    const configSvc = app.get(ConfigService);
+    const centralLogger = new LoggerService();
+    app.useGlobalFilters(new AllExceptionsFilter(configSvc, centralLogger));
 
-  app.use(bodyParser.json({ limit: '50mb' }));
-  app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
+    app.use(bodyParser.json({ limit: '50mb' }));
+    app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 
-  app.setGlobalPrefix('api/v1');
+    app.setGlobalPrefix('api/v1');
 };

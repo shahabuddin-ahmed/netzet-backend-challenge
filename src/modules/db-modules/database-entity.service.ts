@@ -2,7 +2,6 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
-  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
@@ -17,6 +16,8 @@ import {
   IUpdateAuthorPayload,
   IUpdateBookPayload,
 } from '../../common/interface/common.interface';
+import { NotFoundException } from '../../common/exception/not-found.exception';
+import { ERROR_CODES } from '../../common/exception/error-code';
 
 export abstract class IDbEntityService {
   abstract createAuthor(payload: ICreateAuthorPayload): Promise<Author>;
@@ -94,7 +95,10 @@ export class DbEntityService implements IDbEntityService {
     const author = await this.authorRepository.findOne({ where: { id } });
 
     if (!author) {
-      throw new NotFoundException(`Author with id ${id} not found`);
+      throw new NotFoundException(
+        ERROR_CODES.E_NOT_FOUND,
+        `Author with id ${id} not found`,
+      );
     }
 
     Object.assign(author, payload);
@@ -102,7 +106,10 @@ export class DbEntityService implements IDbEntityService {
 
     const updatedAuthor = await this.findAuthorById(id, true);
     if (!updatedAuthor) {
-      throw new NotFoundException(`Author with id ${id} not found`);
+      throw new NotFoundException(
+        ERROR_CODES.E_NOT_FOUND,
+        `Author with id ${id} not found`,
+      );
     }
 
     return updatedAuthor;
@@ -112,7 +119,10 @@ export class DbEntityService implements IDbEntityService {
     const author = await this.authorRepository.findOne({ where: { id } });
 
     if (!author) {
-      throw new NotFoundException(`Author with id ${id} not found`);
+      throw new NotFoundException(
+        ERROR_CODES.E_NOT_FOUND,
+        `Author with id ${id} not found`,
+      );
     }
 
     const bookCount = await this.bookRepository.count({
@@ -147,7 +157,10 @@ export class DbEntityService implements IDbEntityService {
 
     const createdBook = await this.findBookById(book.id);
     if (!createdBook) {
-      throw new NotFoundException(`Book with id ${book.id} not found`);
+      throw new NotFoundException(
+        ERROR_CODES.E_NOT_FOUND,
+        `Book with id ${book.id} not found`,
+      );
     }
 
     return createdBook;
@@ -206,7 +219,10 @@ export class DbEntityService implements IDbEntityService {
     });
 
     if (!book) {
-      throw new NotFoundException(`Book with id ${id} not found`);
+      throw new NotFoundException(
+        ERROR_CODES.E_NOT_FOUND,
+        `Book with id ${id} not found`,
+      );
     }
 
     const { authorId, ...bookPayload } = payload;
@@ -229,7 +245,10 @@ export class DbEntityService implements IDbEntityService {
 
     const updatedBook = await this.findBookById(id);
     if (!updatedBook) {
-      throw new NotFoundException(`Book with id ${id} not found`);
+      throw new NotFoundException(
+        ERROR_CODES.E_NOT_FOUND,
+        `Book with id ${id} not found`,
+      );
     }
 
     return updatedBook;
@@ -239,7 +258,10 @@ export class DbEntityService implements IDbEntityService {
     const book = await this.bookRepository.findOne({ where: { id } });
 
     if (!book) {
-      throw new NotFoundException(`Book with id ${id} not found`);
+      throw new NotFoundException(
+        ERROR_CODES.E_NOT_FOUND,
+        `Book with id ${id} not found`,
+      );
     }
 
     await this.bookRepository.remove(book);

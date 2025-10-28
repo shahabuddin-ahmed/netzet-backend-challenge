@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { APP_CONFIG, DATA_SOURCE_OPTIONS } from './common/config/app.config';
 import { SharedModule } from './shared/shared.module';
 import { DatabaseModule } from './modules/db-modules/database.module';
+import { AuthorModule } from './modules/author/author.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { DatabaseModule } from './modules/db-modules/database.module';
     }),
     SharedModule,
     DatabaseModule,
+    AuthorModule,
   ],
   controllers: [AppController],
   providers: [AppService],

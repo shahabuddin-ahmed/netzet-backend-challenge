@@ -24,7 +24,6 @@ export class Author {
   @Column({ type: 'text', nullable: true })
   bio?: string;
 
-  // Use 'date' so it stays portable across SQLite/Postgres
   @Column({ type: 'date', nullable: true })
   birthDate?: string | Date;
 

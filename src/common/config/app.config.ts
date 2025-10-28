@@ -16,7 +16,7 @@ export const APP_CONFIG = {
     CLI: {
       MIGRATIONS_DIR: 'src/migration',
     },
-    SYNCHRONIZE: false,
+    SYNCHRONIZE: true,
     DEBUG: process.env.DB_DEBUG || false,
   },
 };

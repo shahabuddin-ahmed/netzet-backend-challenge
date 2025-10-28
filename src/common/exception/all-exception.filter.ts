@@ -46,7 +46,7 @@ export class AllExceptionsFilter<T> implements ExceptionFilter {
         let exceptionResponse: string | Record<string, any> = {};
         exceptionResponse = exception.getResponse();
 
-        statusCode = exception.getStatus();
+        errorResponse.statusCode = exception.getStatus();
         errorResponse.message = exception.message;
         errorResponse.code =
           (typeof exceptionResponse === 'object' &&

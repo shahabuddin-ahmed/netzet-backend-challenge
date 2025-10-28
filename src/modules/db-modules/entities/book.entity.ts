@@ -19,7 +19,6 @@ export class Book {
   @Column({ type: 'varchar' })
   title!: string;
 
-  // Keep formatted ISBN-13 like "978-3-16-148410-0"
   @Index({ unique: true })
   @Column({ type: 'varchar' })
   isbn!: string;
@@ -32,12 +31,11 @@ export class Book {
 
   @ManyToOne(() => Author, (author) => author.books, {
     nullable: false,
-    onDelete: 'RESTRICT', // prevent deleting an author that still has books
+    onDelete: 'RESTRICT',
   })
   @JoinColumn({ name: 'authorId' })
   author!: Author;
 
-  // Handy read-only FK field for DTOs/queries
   @RelationId((book: Book) => book.author)
   authorId!: number;
 

@@ -22,11 +22,12 @@ export class AllExceptionsFilter<T> implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const res = ctx.getResponse<Response>();
 
-    const traceId = `GFT${Date.now()}`;
+    const traceId = `TI${Date.now()}`;
 
     let statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
     const errorResponse: IErrorResponse = {
       code: ERROR_CODES.E_INTERNAL_SERVER_ERROR,
+      statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
       message: ERROR_MESSAGE.E_INTERNAL_SERVER_ERROR.message,
       traceId,
       errors: [ERROR_MESSAGE.E_INTERNAL_SERVER_ERROR.message],

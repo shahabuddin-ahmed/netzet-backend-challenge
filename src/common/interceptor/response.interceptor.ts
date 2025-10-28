@@ -20,15 +20,22 @@ export class ResponseInterceptor<T> implements NestInterceptor<T, Response<T>> {
     return next.handle().pipe(
       map((data) => {
         data = data ? data : {};
-        let message = 'data fetched';
+        let message = 'Data fetched successfully';
+        let statusCode = 200;
         if (typeof data === 'object') {
           if (data.responseMessage || 'responseMessage' in data) {
             message = data.responseMessage;
             delete data.responseMessage;
           }
+
+          if (data.statusCode || 'statusCode' in data) {
+            statusCode = data.statusCode;
+            delete data.statusCode;
+          }
         }
         return {
           code: 'SUCCESS',
+          statusCode: statusCode,
           message: message,
           data: data,
         };

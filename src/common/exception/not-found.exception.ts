@@ -3,7 +3,7 @@ import { ERROR_CODES, ERROR_MESSAGE } from './error-code';
 
 export class NotFoundException extends HttpException {
   constructor(
-    errorCode: ERROR_CODES,
+    errorCode: ERROR_CODES = ERROR_CODES.E_NOT_FOUND,
     customMessage?: string,
     errors?: string[],
   ) {
@@ -11,10 +11,10 @@ export class NotFoundException extends HttpException {
     super(
       {
         errorCode,
-        message: message,
+        message,
         errors: errors ?? [message],
       },
-      HttpStatus.BAD_REQUEST,
+      HttpStatus.NOT_FOUND,
     );
   }
 }

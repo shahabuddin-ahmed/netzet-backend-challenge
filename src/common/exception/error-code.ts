@@ -5,6 +5,7 @@ export enum ERROR_CODES {
   E_VALIDATION_FAILED = 'E_VALIDATION_FAILED',
   E_SESSION_EXPIRED = 'E_SESSION_EXPIRED',
   E_BAD_REQUEST = 'E_BAD_REQUEST',
+  E_NOT_FOUND = 'E_NOT_FOUND',
   E_INTERNAL_SERVER_ERROR = 'E_INTERNAL_SERVER_ERROR',
 }
 
@@ -26,6 +27,9 @@ export const ERROR_MESSAGE: Record<ERROR_CODES, { message: string }> = {
   },
   E_BAD_REQUEST: {
     message: 'Bad request',
+  },
+  E_NOT_FOUND: {
+    message: 'Resource not found',
   },
   E_INTERNAL_SERVER_ERROR: {
     message: 'Internal Server Error',

@@ -10,19 +10,19 @@ import { AuthorModule } from './modules/author/author.module';
 import { BookModule } from './modules/book/book.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      load: [() => ({ ...APP_CONFIG, isGlobal: true })],
-    }),
-    TypeOrmModule.forRootAsync({
-      useFactory: () => DATA_SOURCE_OPTIONS,
-    }),
-    SharedModule,
-    DatabaseModule,
-    AuthorModule,
-    BookModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        ConfigModule.forRoot({
+            load: [() => ({ ...APP_CONFIG, isGlobal: true })],
+        }),
+        TypeOrmModule.forRootAsync({
+            useFactory: () => DATA_SOURCE_OPTIONS,
+        }),
+        SharedModule,
+        DatabaseModule,
+        AuthorModule,
+        BookModule,
+    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}

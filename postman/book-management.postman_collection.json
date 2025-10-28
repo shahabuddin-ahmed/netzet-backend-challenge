@@ -1,0 +1,170 @@
+{
+  "info": {
+    "_postman_id": "7a87f4ff-5f4f-4b9f-8c97-4d3810bd0fe4",
+    "name": "Netzet Book Management API",
+    "description": "Sample requests for exercising the Authors and Books endpoints exposed by the Netzet backend challenge.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authors",
+      "item": [
+        {
+          "name": "Create Author",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"George\",\n  \"lastName\": \"Orwell\",\n  \"bio\": \"Author of 1984\",\n  \"birthDate\": \"1903-06-25\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/authors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "authors"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Authors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/authors?page=1&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "authors"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Author By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/authors/{{authorId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "authors",
+                "{{authorId}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "Create Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"1984\",\n  \"isbn\": \"978-0451524935\",\n  \"publishedDate\": \"1949-06-08\",\n  \"genre\": \"Dystopian\",\n  \"authorId\": {{authorId}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/books",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "books"
+              ]
+            }
+          }
+        },
+        {
+          "name": "List Books",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/books?page=1&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "books"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Book By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/books/{{bookId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "books",
+                "{{bookId}}"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1"
+    },
+    {
+      "key": "authorId",
+      "value": "1"
+    },
+    {
+      "key": "bookId",
+      "value": "1"
+    }
+  ]
+}

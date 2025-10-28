@@ -17,7 +17,7 @@ services:
       DB_PASSWORD: admin
       DB_HOST: db
       DB_PORT: 3306
-      SYNCHRONIZE: 'true'
+      SYNCHRONIZE: "true"
       APPLICATION_SERVER_PORT: 3000
       APP_FORCE_SHUTDOWN_SECOND: 30
 

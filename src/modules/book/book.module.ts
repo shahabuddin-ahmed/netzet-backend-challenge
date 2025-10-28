@@ -5,8 +5,8 @@ import { BookController } from './book.controller';
 import { BookService } from './services/book.service';
 
 @Module({
-  imports: [SharedModule, DatabaseModule],
-  controllers: [BookController],
-  providers: [BookService],
+    imports: [SharedModule, DatabaseModule],
+    controllers: [BookController],
+    providers: [BookService],
 })
 export class BookModule {}

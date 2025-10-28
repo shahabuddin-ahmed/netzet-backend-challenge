@@ -39,8 +39,7 @@ export class AuthorController {
   @HttpCode(HttpStatus.OK)
   findOne(
     @Param('id', ParseIntPipe) id: number,
-    @Query('withBooks', new ParseBoolPipe({ optional: true }))
-    withBooks?: boolean,
+    @Query('withBooks', new ParseBoolPipe({ optional: true })) withBooks?: boolean,
   ) {
     return this.authorService.findOne(id, withBooks);
   }
